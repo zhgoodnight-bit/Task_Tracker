@@ -58,9 +58,6 @@ class TaskManager:
             print("Task list is empty, nothing to delete")
             task_tracker()
     
-    def other_case(self):
-        print("Error:\nEnter Choice: 1 for Add Task\nEnter Choice: 2 for View Tasks\nEnter Choice:3 for Delete Task\nEnter Choice:4 Exit")
-        task_tracker()
     
     def exit(self):
         pass
@@ -107,13 +104,12 @@ def task_tracker():
                     break
                 elif line == 4:
                     break
-                # elif line == "" or line not in task_list_keys:
-                #     c1.other_case()
-                #     break
             except Exception as err:
                 print(err)
 
     except Exception as err: # End of input reached, exit the loop
         print(err)
 
+
 task_tracker()
+
