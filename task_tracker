@@ -1,3 +1,4 @@
+import string
 class TaskManager:
     def __init__(self):
         self.task = []
@@ -30,12 +31,17 @@ class TaskManager:
         task_tracker()
 
     def delete_task(self):
+        
         if len(self.task) > 0:
             for idx, items in enumerate(self.task):
                 print(f'Index ID {idx}: Task- {items}')
 
             delete_index_id = input("-----------------------------------\nFrom above please enter the Index ID for the task you want to delete:")
             try:
+                restricted_character = ["`","~","!","@","#","$","%","^","&","*","(",")","_","-","+","=",'"', '" "',"<",">","?","/","\\","|","{","}","[","]","{ }","[]"," "]+ list(string.ascii_letters)
+                if any(i in delete_index_id for i in restricted_character):
+                    print("Error: Please enter a valid Index ID number.")
+                    c1.delete_task()
                 delete_index_id = int(delete_index_id)
                 if 0 <= delete_index_id < len(self.task):
                         deleted_task_id = self.task.pop(delete_index_id)
@@ -52,9 +58,9 @@ class TaskManager:
             print("Task list is empty, nothing to delete")
             task_tracker()
     
-    #def other_case(self):
-       # print("Error:\nEnter Choice: 1 for Add Task\nEnter Choice: 2 for View Tasks\nEnter Choice:3 for Delete Task\nEnter Choice:4 Exit")
-       # task_tracker()
+    def other_case(self):
+        print("Error:\nEnter Choice: 1 for Add Task\nEnter Choice: 2 for View Tasks\nEnter Choice:3 for Delete Task\nEnter Choice:4 Exit")
+        task_tracker()
     
     def exit(self):
         pass
@@ -79,7 +85,7 @@ def task_tracker():
             line = input("Enter choice: ").strip()
 
             # Step 1: Define restricted characters
-            restricted_character = ["`","~","!","@","#","$","%","^","&","*","(",")","_","-","+","=",'"', '" "',"<",">","?","/","\\","|","{","}","[","]","{ }","[]"," "]
+            restricted_character = ["`","~","!","@","#","$","%","^","&","*","(",")","_","-","+","=",'"', '" "',"<",">","?","/","\\","|","{","}","[","]","{ }","[]"," ",":","'"] + list(string.ascii_letters)
             
             if any(i in line for i in restricted_character):
                 print("Error: Please enter a valid number (1-4).")
@@ -111,4 +117,3 @@ def task_tracker():
         print(err)
 
 task_tracker()
-
