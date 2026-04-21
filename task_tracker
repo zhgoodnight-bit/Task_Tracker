@@ -1,0 +1,114 @@
+class TaskManager:
+    def __init__(self):
+        self.task = []
+
+    def add_task(self):
+        user_input1 = input("Enter Title: ")
+        user_input2 = input("Enter Description: ")
+        if user_input1 != "" and user_input2 != "":
+            task_extension = {
+                "Title" : user_input1,
+                "Description" : user_input2
+            }
+            self.task.append(task_extension)
+            print("Task added successfully!")
+            task_id = len(self.task) - 1
+            print(f'Added Task: {self.task[task_id]}')
+            task_tracker()
+        else:
+            # Handle empty input case
+            print("Error: Title and Description cannot be empty.")
+            task_tracker()
+  
+    def view_tasks(self):
+        if self.task:
+            print(f'Current Tasks List:')
+            for idx, items in enumerate(self.task):
+                print(f'Task ID {idx}: Task- {items}')
+        else:
+            print("Task list is empty")
+        task_tracker()
+
+    def delete_task(self):
+        if len(self.task) > 0:
+            for idx, items in enumerate(self.task):
+                print(f'Index ID {idx}: Task- {items}')
+
+            delete_index_id = input("-----------------------------------\nFrom above please enter the Index ID for the task you want to delete:")
+            try:
+                delete_index_id = int(delete_index_id)
+                if 0 <= delete_index_id < len(self.task):
+                        deleted_task_id = self.task.pop(delete_index_id)
+                        print(f'Task deleted: {deleted_task_id}')
+                        task_tracker()
+                else:
+                       print("Error: Please enter a valid Index ID.")
+                       task_tracker()
+
+            except ValueError:
+                print("Error: Please enter a valid Index ID.")
+                task_tracker()
+        else:
+            print("Task list is empty, nothing to delete")
+            task_tracker()
+    
+    def other_case(self):
+        print("Error:\nEnter Choice: 1 for Add Task\nEnter Choice: 2 for View Tasks\nEnter Choice:3 for Delete Task\nEnter Choice:4 Exit")
+        task_tracker()
+    
+    def exit(self):
+        pass
+
+task_list = {
+        1 : "Add Task",
+        2 : "View Tasks",
+        3 :  "Delete Task",
+        4 :  "Exit"
+    }
+c1 = TaskManager()
+
+def task_tracker():
+    try:
+        print("===== Task Tracker =====")
+        for i, j in task_list.items():
+            print(f'{i}. {j}')
+
+        task_list_keys = task_list.keys()
+
+        while True:
+            line = input("Enter choice: ").strip()
+
+            # Step 1: Define restricted characters
+            restricted_character = ["`","~","!","@","#","$","%","^","&","*","(",")","_","-","+","=",'"', '" "',"<",">","?","/","\\","|","{","}","[","]","{ }","[]"," "]
+            
+            if any(i in line for i in restricted_character):
+                print("Error: Please enter a valid number (1-4).")
+                continue
+
+            if line == "":
+                print("Error: Please enter a valid number (1-4).")
+                continue
+            try:    
+                line = int(line)
+                if line == 1:
+                    c1.add_task()
+                    break
+                elif line == 2:
+                    c1.view_tasks()
+                    break
+                elif line == 3:
+                    c1.delete_task()
+                    break
+                elif line == 4:
+                    break
+                # elif line == "" or line not in task_list_keys:
+                #     c1.other_case()
+                #     break
+            except Exception as err:
+                print(err)
+
+    except Exception as err: # End of input reached, exit the loop
+        print(err)
+
+task_tracker()
+
