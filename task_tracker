@@ -52,9 +52,9 @@ class TaskManager:
             print("Task list is empty, nothing to delete")
             task_tracker()
     
-    def other_case(self):
-        print("Error:\nEnter Choice: 1 for Add Task\nEnter Choice: 2 for View Tasks\nEnter Choice:3 for Delete Task\nEnter Choice:4 Exit")
-        task_tracker()
+    #def other_case(self):
+       # print("Error:\nEnter Choice: 1 for Add Task\nEnter Choice: 2 for View Tasks\nEnter Choice:3 for Delete Task\nEnter Choice:4 Exit")
+       # task_tracker()
     
     def exit(self):
         pass
