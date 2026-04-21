@@ -1,23 +1,28 @@
 import string
 class TaskManager:
     def __init__(self):
-        # Initialize an empty list to store tasks
+        # Initialize empty list to store Tasks
         self.task = []
 
     def add_task(self):
-        # Ask user for task title and description
+        # Ask user for input Task's Title and Description
         user_input1 = input("Enter Title: ")
         user_input2 = input("Enter Description: ")
+
         # Check if both inputs are not empty
         if user_input1 != "" and user_input2 != "":
             task_extension = {
                 "Title" : user_input1,
                 "Description" : user_input2
             }
-            # Add the new task to the list
+
+            # Add the new task to the Tasks(self.task) list
             self.task.append(task_extension)
             print("✅ Task added successfully!")
+
+            #Get the newly added Task's Index ID
             task_id = len(self.task) - 1
+            #Display the newly added Task
             print(f'Added Task: {self.task[task_id]}')
             task_tracker()
         else:
@@ -39,26 +44,31 @@ class TaskManager:
     def delete_task(self):
         # Check if there are tasks to delete
         if len(self.task) > 0:
+
             # Show all tasks with their index IDs
             for idx, items in enumerate(self.task):
                 print(f'Index ID {idx}: Task- {items}')
 
+            # Ask user for input Task's Index ID for delete
             delete_index_id = input("-----------------------------------\nEnter the Index ID of the task you want to delete:")
             try:
                 # Restricted characters: letters, symbols, spaces
                 restricted_character = ["`","~","!","@","#","$","%","^","&","*","(",")","_","-","+","=",'"', '" "',"<",">","?","/","\\","|","{","}","[","]","{ }","[]"," ","."]+ list(string.ascii_letters)
+                
                  # Validate input: must be a number only
                 if any(i in delete_index_id for i in restricted_character):
                     print("❌ Error: Index ID must be a number only (e.g., 0, 1, 2).")
                     c1.delete_task()
+
                 delete_index_id = int(delete_index_id)
+                
                 # Check if entered ID is valid
                 if 0 <= delete_index_id < len(self.task):
                         deleted_task_id = self.task.pop(delete_index_id)
                         print(f'🗑️ Task deleted: {deleted_task_id}')
                         task_tracker()
                 else:
-                       print("❌ Error: Invalid Index ID. Please enter a number shown in the list above.")
+                       print("❌ Error: Invalid Index ID.")
                        task_tracker()
 
             except ValueError:
